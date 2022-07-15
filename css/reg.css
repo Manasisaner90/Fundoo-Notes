@@ -1,0 +1,17 @@
+ 
+a:hover {
+    background-color: rgb(175, 197, 210);
+  }
+  .gcolor{
+    color: cornflowerblue;
+  }
+  .rcolor{
+    color:red;
+  }
+  
+  .ocolor{
+    color:rgb(231, 87, 3);
+  }
+  .lcolor{
+    color:green;
+  }
