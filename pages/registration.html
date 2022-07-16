@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Fandoo</title>
     <meta charset="utf-8">
@@ -10,15 +9,15 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/reg.css">
+    <script src="../js/app.js"></script>
 </head>
-
 <body>
     <div class="container-fluid py-5 h-100">
         <div class="row justify-content-center align-items-center h-100">
             <div class="col-12 col-lg-9 col-xl-7 ">
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                     <div class="card-body p-3 p-md-5">
-                        <div>
+                        <div class="ml-3">
                             <span class="gcolor font-weight-bold">F</span>
                             <span class="ocolor font-weight-bold">U</span>
                             <span class="rcolor font-weight-bold">N</span>
@@ -29,43 +28,49 @@
                         <div>
                             <h5 class=" pb-2 pb-md-0 mb-md-4 mt-3 ml-3">Create your Fundoo Account</h5>
                         </div>
-                        <form>
+                        <form action="#" onsubmit="return validation()">
                             <div class="row">
                                 <div class="col-md-12 d-flex">
                                     <div class="row">
                                         <div class="col-lg-12 d-flex flex-wrap">
                                             <div class="col-md-8 d-flex mb-3 ">
-                                                <div class="form-outline">
-                                                    <input type="text" id="firstName"
-                                                        class="form-control " placeholder="First Name">
+                                                <div class="form-group">
+                                                    <input type="text" id="firstName" name="firstname"
+                                                        class="form-control " placeholder="First Name"
+                                                        autocomplete="off">
+                                                    <span id="name" class="text-danger"></span>
                                                     <!-- <label class="form-label" for="firstName">First Name</label> -->
                                                 </div>
-                                                <div class="form-outline ml-2">
-                                                    <input type="text" id="lastName"
-                                                        class="form-control " placeholder="Last Name">
+                                                <div class="form-group ml-2">
+                                                    <input type="text" id="lastName" name="lastname"
+                                                        class="form-control " placeholder="Last Name"
+                                                        autocomplete="off">
+                                                    <span id="lname" class="text-danger"></span>
                                                     <!-- <label class="form-label" for="lasttName">Lastst Name</label> -->
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-8 mt-2">
-                                                <input type="text" id="userName" class="form-control "
-                                                    placeholder="User Name">
+                                            <div class=" form-group col-md-8 mt-2">
+                                                <input type="text" id="userName" name="userName" class="form-control "
+                                                    placeholder="User Name" autocomplete="off">
+                                                <span id="Uname" class="text-danger"></span>
                                                 <p class="ml-3">You can use letters, numbers & periods</p>
                                                 <a href="" class="">Use my current email address instead</a>
                                             </div>
                                             <div class="col-md-8 d-flex mt-4">
-                                                <div class="form-outline">
-                                                    <input type="text" id="password"
-                                                        class="form-control " placeholder="Passward">
+                                                <div class="form-group">
+                                                    <input type="text" id="password" name="pass" class="form-control "
+                                                        placeholder="Passward" autocomplete="off">
+                                                    <span id="pwd" class="text-danger"></span>
                                                     <!-- <label class="form-label" for="firstName">First Name</label> -->
                                                 </div>
-                                                <div class="form-outline ml-2">
-                                                    <input type="text" id="confirm" class="form-control "
-                                                        placeholder="Confirm">
+                                                <div class="form-group ml-2">
+                                                    <input type="text" id="confirm" name="conpass" class="form-control "
+                                                        placeholder="Confirm" autocomplete="off">
+                                                    <span id="cnfpass" class="text-danger"></span>
                                                 </div>
                                             </div>
 
-                                            <p class="ml-3">Use 8 or more characters with a mix of letters, numbers &
+                                            <p class="ml-4">Use 8 or more characters with a mix of letters, numbers &
                                                 symbols</p>
 
                                         </div>
@@ -76,6 +81,17 @@
                                                 Show password
                                             </label>
                                         </div>
+                                        <div class="col-md-12 d-flex  ml-0 mb-4">
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn  text-primary ">Sign in instead</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type = "submit" name="Next" value="submit" class="btn btn-primary" autocomplete="off">
+                                            </div>
+                                        
+                                            
+                                        </div>
+                                      
                                     </div>
                                     <div class="col-md-4 text-center">
                                         <img src="../assets/account.svg">
@@ -85,18 +101,16 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-lg-12 d-flex ml-4   mb-4">
+                    <!-- <div class="col-lg-12 d-flex ml-4   mb-4">
                         <div class="col-md-6">
                             <button type="button" class="btn btn-lg text-primary">Sign in instead</button>
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-primary btn-lg">Next</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-      
-
         </div>
     </div>
 
