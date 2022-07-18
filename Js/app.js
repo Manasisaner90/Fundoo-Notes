@@ -3,7 +3,7 @@ function validation(){
     var lastName = document.getElementById('lastName').value;
     var userName = document.getElementById('userName').value;
     var password = document.getElementById('password').value;
-    var confirmpass = document.getElementById('confirm').value;
+    var confirm = document.getElementById('confirm').value;
  
 
     if(firstName == ""){
