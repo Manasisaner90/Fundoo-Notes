@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/sign.css">
-    <script src="../Js/signvalidation.js"></script>
+    <script src="../Js/resetpass.js"></script>
 </head>
 
 <body>
@@ -28,33 +28,23 @@
                             <span class="ocolor font-weight-bold">O</span>
                         </div>
                         <div class="text-center">
-                            <h5 class=" pb-2 pb-md-0 mb-md-4 mt-3 ">Sign In</h5>
-                            <p>Use your Fundoo Account</p>
+                            <h5 class=" pb-2 pb-md-0 mb-md-4 mt-3 ">Reset Password</h5>
                         </div>
                         <form action="#" onsubmit="return validation()">
                             <div class="row">
                                 <div class="col-md-12  ">     
                                         <div class="col-lg-12  ">
-                                                <input type="text" id="userName" class="form-control "
-                                                    placeholder=" Email or Phone">    
-                                                    <span id="Uname" class="text-danger text-left"></span>             
+                                                <input type="text" id="Npaas" class="form-control "
+                                                    placeholder="Enter New Passward">    
+                                                    <span id="Npwd" class="text-danger text-left"></span>             
                                        </div>
                                        <div class="col-lg-12 mt-4 ">
-                                        <input type="text" id="password" class="form-control "
-                                            placeholder=" Passward">     
-                                        <span id="pass" class="text-danger text-left"></span>            
-                               </div>
-                                       <div class="text-left ml-3">
-                                        <a href=""><p class="ml-3">Forgot Passward?</p></a>
-                                        <p class="ml-2">Not your computer? Use Guest mode to sign in privately.<br><a href="">Learn more</a></p>   
-                                       </div>  
-                                       <div class="col-md-12 d-flex  ml-0 mb-4">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn  text-primary ">Create account</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type = "submit" name="Next" value="submit" class="btn btn-primary" autocomplete="off">
-                                        </div>     
+                                        <input type="text" id="confpassword" class="form-control "
+                                            placeholder="Confirm Passward">     
+                                        <span id="Cpass" class="text-danger text-left"></span>            
+                               </div> 
+                                       <div class="col-md-12 d-flex  ml-0 mt-4">
+                                            <input type = "submit" name="Next" value="submit" class="btn btn-primary" autocomplete="off">    
                                     </div>           
                                 </div>
                             </div>
