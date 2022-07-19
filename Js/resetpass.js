@@ -13,10 +13,10 @@ function validation(){
    
     
     let data={
-        email:Npaas.value,
-        password:confpassword.value,   
+        email:Npaas,
+        password:confpassword,   
       }
-
+console.log(data)
     $.ajax({
         url: 'http://fundoonotes.incubation.bridgelabz.com/api/user/reset',
         type: 'POST',

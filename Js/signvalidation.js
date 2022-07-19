@@ -26,10 +26,10 @@ function validation(){
    
 
     let data={
-        email:userName.value,
-        password:password.value,  
+        email:userName,
+        password:password,  
       }
-
+  
     $.ajax({
         url: 'http://fundoonotes.incubation.bridgelabz.com/api/user/login',
         type: 'POST',

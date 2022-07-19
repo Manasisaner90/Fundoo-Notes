@@ -7,10 +7,10 @@ function validation(){
     }
    
     let data={
-        email:Email.value,
+        email:Email,
            
       }
-
+console.log(data)
     $.ajax({
         url: 'http://fundoonotes.incubation.bridgelabz.com/api/user/reset',
         type: 'POST',
