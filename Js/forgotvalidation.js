@@ -6,4 +6,21 @@ function validation(){
         return false;
     }
    
+    let data={
+        email:Email.value,
+           
+      }
+
+    $.ajax({
+        url: 'http://fundoonotes.incubation.bridgelabz.com/api/user/reset',
+        type: 'POST',
+        data:data,
+        'Content-Type': 'application/json',
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (error) {
+          console.log(error);
+        }
+     });
 }
