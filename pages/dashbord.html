@@ -89,35 +89,48 @@
     <div class="container ">
       <div class="row ">
         <div class="col-md-12 d-flex justify-content-center mt-4">
-          <div class="col-md-8 shadow bg-white rounded-lg images">
-            <button type="button"  id = "title" class="collapsible">Take a note
-               <img src="../assets/checked.svg"> 
-               <img src="../assets/brush.svg"> 
-               <img src="../assets/gallery.svg"> 
-            </button>
-            <div class="col-md-12 content">
-          
-              <input type="text" id="desc"  placeholder="Take a note"> 
-              <div class="d-flex">
-                <img src="../assets/bell.svg">
-                <img src="../assets/user.svg">
-                <img src="../assets/cpallet.svg">
-                <img src="../assets/gallery.svg">
-                <img src="../assets/download.svg">
-                <img src="../assets/3dot.svg"  >
-                <img src="../assets/back.svg">
-                <img class="redu" src="../assets/back.svg">
+          <div class="col-md-7 shadow bg-white rounded-lg images">
+            <div id="div1" style="display:block ;">
+              <div class="d-flex justify-content-between">
                 <div>
-                  <p class="text-right">Close</p>
+                  <button type="button" id="title" onclick="replace();return false" class="collapsible">Take a note
+                  </button>
+                </div >
+                <div class ="top">
+                  <img src="../assets/checked.svg">
+                  <img src="../assets/brush.svg">
+                  <img src="../assets/gallery.svg">
                 </div>
-                
               </div>
-             
+            </div>
+            <div id="div2" style="display:none" class="col-md-12 content ">
+              <div class="d-flex mt-3">
+                <input type="text" class="mb-2" placeholder="Title">
+                <img src="../assets/pin.svg">
+              </div>
+
+              <input type="text" class="mb-2 mt-3" id="desc" placeholder="Take a note">
+              <div class="d-flex  justify-content-between ">
+                <div class="col-md-10">
+                  <img src="../assets/bell.svg">
+                  <img src="../assets/user.svg">
+                  <img src="../assets/cpallet.svg">
+                  <img src="../assets/gallery.svg">
+                  <img src="../assets/download.svg">
+                  <img src="../assets/3dot.svg">
+                  <img src="../assets/back.svg">
+                  <img class="redu" src="../assets/back.svg">
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-light mb-2">Close</button>
+                </div>
+                <div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
 
   </header>
@@ -135,7 +148,7 @@
     document.getElementById("main").style.marginLeft= "0";
   }
   </script> -->
-<script>
+<!-- <script>
   var coll = document.getElementsByClassName("collapsible");
   var i;
 
@@ -151,5 +164,11 @@
       }
     });
   }
+</script> -->
+
+<script>
+  function replace() {
+    document.getElementById("div1").style.display = "none";
+    document.getElementById("div2").style.display = "block";
+  } 
 </script>
- 
