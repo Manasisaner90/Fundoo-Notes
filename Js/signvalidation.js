@@ -37,6 +37,7 @@ function validation(){
         'Content-Type': 'application/json',
         success: function (result) {
             console.log(result);
+            localStorage.setItem('token',result.id)
         },
         error: function (error) {
           console.log(error);
