@@ -29,7 +29,7 @@ function validation(){
         email:userName,
         password:password,  
       }
-  
+  console.log(data)
     $.ajax({
         url: 'http://fundoonotes.incubation.bridgelabz.com/api/user/login',
         type: 'POST',
