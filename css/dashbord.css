@@ -128,3 +128,20 @@ input[type="text"] {
  
 }
 
+.box2{
+visibility: hidden;
+
+}
+
+
+.box:hover .box2{
+visibility: visible;
+}
+
+.box{
+  border:1px solid green ;
+  border-radius: 10px; 
+  display:flex; 
+  flex-direction:column; 
+        width:250px; height:auto; margin:10px; padding:10px;
+}
