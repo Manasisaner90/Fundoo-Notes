@@ -7,15 +7,18 @@ function openNav() {
     nav.style.width = '250px';
   }
 }
+function togglePopup() {
+  $(".popup").toggle();
+}
 
-function OpenModal() {
-  let element = document.getElementById('div2')
-  element.style.display = 'block'
-}
-function CloseModal() {
-  let element = document.getElementById('div2')
-  element.style.display = 'none'
-}
+// function OpenModal() {
+//   let element = document.getElementById('div2')
+//   element.style.display = 'block'
+// }
+// function CloseModal() {
+//   let element = document.getElementById('div2')
+//   element.style.display = 'none'
+// }
 
 function replace() {
   document.getElementById("div1").style.display = "none";
@@ -73,28 +76,28 @@ $.ajax({
     console.log(result.data.data);
     let note = result.data.data;
     document.getElementById('demo').innerHTML = note.map((e) =>`
-      <div class ="box" id="a">
-            <p>${e.title}</p>
+    <div class ="box" >
+            <p  onclick="togglePopup()">${e.title}</p>
             <p>${e.description}</p>
-            <div class="box2">
-            <img src="../assets/bell.svg" style=" height: 18px; width: 18px;  margin-bottom: 10px;margin-right: 15px;" >
-                  <img src="../assets/user.svg" style=" height: 18px; width: 18px;  margin-bottom: 10px;margin-right: 15px;">
-                  <img src="../assets/cpallet.svg"  style=" height: 18px; width: 18px;  margin-bottom: 10px;margin-right: 15px;">
-                  <img src="../assets/gallery.svg"  style=" height: 18px; width: 18px;  margin-bottom: 10px;margin-right: 15px;" >
-                  <img src="../assets/download.svg"  style=" height: 18px; width: 18px;  margin-bottom: 10px;margin-right: 15px;">
-                        <div class="dropdown">
-                      <span class="dropbtn"><img src="../assets/3dot.svg" height: 18px; width: 18px;></span>
-                      <div class="dropdown-content" style="left:0;">
-                        <a href="#" id=${e.id}>Delete note</a>
-                        <a href="#">Add label</a>
-                        <a href="#">Add drawing</a>
-                        <a href="#">Make a copy</a>
-                        <a href="#">Show checkboxes</a>
-                        <a href="#">Copy to Google Docs</a>
-                      </div>
-                    </div>
-            </div>
-       </div>`
+              <div class="box2">
+                    <img src="../assets/bell.svg" style=" height: 18px; width: 18px;  margin-bottom: 10px;margin-right: 15px;" >
+                    <img src="../assets/user.svg" style=" height: 18px; width: 18px;  margin-bottom: 10px;margin-right: 15px;">
+                    <img src="../assets/cpallet.svg"  style=" height: 18px; width: 18px;  margin-bottom: 10px;margin-right: 15px;">
+                    <img src="../assets/gallery.svg"  style=" height: 18px; width: 18px;  margin-bottom: 10px;margin-right: 15px;" >
+                  <a href="#" ><img src="../assets/download.svg"  style=" height: 18px; width: 18px;  margin-bottom: 10px;margin-right: 15px;"></a>
+                  <div class="dropdown">
+                        <span class="dropbtn"><img src="../assets/3dot.svg" height: 18px; width: 18px;></span>
+                        <div class="dropdown-content" style="left:0;">
+                          <a href="#" id=${e.id}>Delete note</a>
+                          <a href="# ">Add label</a>
+                          <a href="#">Add drawing</a>
+                          <a href="#">Make a copy</a>
+                          <a href="#">Show checkboxes</a>
+                          <a href="#">Copy to Google Docs</a>
+                        </div>
+                  </div>
+              </div>
+      </div>`
     )
   },
   error: function (error) {
@@ -104,15 +107,11 @@ $.ajax({
 });
  
 
-
-
-
-
  const deletenote = document.querySelector('#demo')
  deletenote.addEventListener('click',(e)=>{
   console.log(e.target.id);
 
-  var Card = document.getElementById('id'); 
+  // var Card = document.getElementById('id'); 
   let req = {
   noteIdList: [e.target.id],
   isDeleted: true,
@@ -132,3 +131,56 @@ $.ajax({
     }
  });
 })
+
+
+// const archivedata = document.querySelector('#demo')
+// archivedata.addEventListener('click',(e)=>{
+//   console.log(e.target.id);
+
+// let req = {
+//   noteIdList: [e.target.id],
+//   isArchived: true,
+// }
+
+
+// console.log(token)
+// $.ajax({
+//     url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes',
+//     type: 'POST',
+//     data:req,
+//     'Content-Type': 'application/json',
+//     headers: { 'Authorization': token },
+//     success: function (result) {
+//         console.log(result);
+//     },
+//     error: function (error) {
+//       console.log(error);
+//     }
+//  });
+// })
+
+ 
+
+// methods.archiveNotes = async function (obj2) {
+//   let archResponse = await axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes', obj2, config)
+//   return archResponse;
+// }
+
+
+// Archive1.addEventListener('click', function () {
+//   console.log('clicked Archive')
+//   document.querySelector(".keep").innerHTML = "Archive";
+//   requirejs(['../JS/mappingNotes.js'], (mapArray) => {
+//       mapArray.mapNotes('archieve')
+
+//   })
+// })
+
+
+// shrinkArchive.addEventListener('click', function () {
+//   document.querySelector(".keep").innerHTML = "Archive";
+//   requirejs(['../JS/mappingNotes.js'], (mapArray) => {
+//       mapArray.mapNotes('archieve')
+
+//   })
+
