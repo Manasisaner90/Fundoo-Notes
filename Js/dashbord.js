@@ -67,9 +67,13 @@ window.onload = function () {
   };
 };
 
+var notearray;
+getNotes();
+// getdata();
    
 //GetNotes List Api code
-let token = localStorage.getItem('token')
+function getNotes(){
+let token = localStorage.getItem('token');
 $.ajax({
   url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList',
   type: 'GET',
@@ -77,13 +81,18 @@ $.ajax({
   headers: { 'Authorization': token },
   success: function (result) {
     console.log(result.data.data);
-    let notearray = result.data.data;
-    let note = notearray.filter((element)=>{
+     notearray = result.data.data;
+     note = notearray.filter((element)=>{
       return element.isDeleted === false && element.isArchived===false;
 
-    }
+    })
 
-    )
+    // let archivearray = result.data.data;
+    // let arch = archivearray.filter((element)=>{
+    //   return element.isArchived=== true;
+
+    // })
+
     document.getElementById('demo').innerHTML = note.map((e) =>`
     <div class ="box">
            <div onclick="togglePopup()" title=${e.title} description=${e.description}>
@@ -114,7 +123,7 @@ $.ajax({
                  </div>
                    </div>
                     <img src="../assets/gallery.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;" >
-                  <a href="#" ><img src="../assets/download.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;"></a>
+                  <a href="#" id=${e.id} ><img src="../assets/download.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;"></a>
                   <div class="dropdown">
                         <span class="dropbtn"><img src="../assets/3dot.svg" height: 10px; width: 10px;></span>
                         <div class="dropdown-content" style="left:0;">
@@ -135,19 +144,22 @@ $.ajax({
 
   }
 });
- 
-const togglebtn = document.querySelector('#togglebtn');
-const trashdiv = document.querySelector('.trashlist');
 
-togglebtn.addEventListener('click',()=>{
-  console.log("Hii")
-if(trashdiv.style.display === "none"){
-  trashdiv.style.display ="block";
-}
-else{
-  trashdiv.style.display ="none";
-}
-});
+
+// document.getElementById("togglebtn").addEventListener("click",function()
+// {
+//   var notes =document.getElementById("trash");
+//   if(notes.style.display == "none")
+//   {
+//     notes.style.display ="block";
+//   }
+//   else
+//   {
+//     notes.style.display = "none";
+//   }
+// }
+// )
+
 
 // function myFunction() {
 //   console.log("hii")
@@ -188,6 +200,12 @@ else{
 //     }
 //  });
 // })
+
+
+// Delete note Api call
+
+
+
 const deletenote = document.querySelector('#demo')
 deletenote.addEventListener('click',(e)=>{
 let req= {
@@ -212,63 +230,47 @@ let req= {
   });
 })
 
-// const archivedata = document.querySelector('#demo')
-// archivedata.addEventListener('click',(e)=>{
-//   console.log(e.target.id);
-
-// let req = {
-//   noteIdList: [e.target.id],
-//   isArchived: true,
-// }
-
-
-// console.log(token)
-// $.ajax({
-//     url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes',
-//     type: 'POST',
-//     data:req,
-//     'Content-Type': 'application/json',
-//     headers: { 'Authorization': token },
-//     success: function (result) {
-//         console.log(result);
-//     },
-//     error: function (error) {
-//       console.log(error);
-//     }
-//  });
-// })
-
-function display(){
-  console.log(hii)
-  document.getElementById("trashnotes").style.disply = "block"
 }
 
-ajaxGet(`http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList`)
-.then(function (result1) {
-    console.log("hello")
 
-    let Res2 = JSON.parse(result1);
-    //   console.log(Res.data.data);
-    let Response2 = Res2.data.data;
-    console.log(Response2)
+// function getdata()
+// {
+//   note = notearray.filter((element)=>{
+//     return element.isDeleted === false && element.isArchived===false;
+//   })
+//   displayNotes(note)
+// }
 
-    let notesArray2 = Response2.filter(data => data.isArchived == false && data.isDeleted == false)
-    nts2 = notesArray2
-
+document.getElementById('nots').addEventListener('click',(c)=>{
+  console.log("get note",c.target);
+  note = notearray.filter((element)=>{
+    return element.isDeleted === false && element.isArchived===false;
+  })
+  displayNotes(note)
+})
+document.getElementById('archive').addEventListener('click',(c)=>{
+  console.log("archive note",c.target);
+  archivearray = notearray.filter((element)=>{
+    return element.isArchived===true;
+  })
+  displayNotes(archivearray)
+})
+document.getElementById('trash').addEventListener('click',(c)=>{
+  console.log("trash note",c.target);
+  trasharray = notearray.filter((element)=>{
+    return element.isDeleted===true;
+  })
+  displayNotes(trasharray)
 })
 
-$(document).on('click', '#Itrash', function (event) {
-  isDeleted = !isDeleted;
-  console.log('deletetrue')
-  console.log(event.target.id)
-
-  let obj3 =
-  {
-
-      "noteIdList": [event.target.id],
-      // "isArchived" : isArchive,
-      "isDeleted": isDeleted
-  }
-
-  console.log(obj3)
-})
+function displayNotes(allnt){
+  let data =allnt
+  document.getElementById('demo').innerHTML= data.map((b)=>
+  `<div>
+  <p>${b.title}</p>
+  <p>${b.isDeleted}</p>
+  <p>${b.isArchived}</p>
+  <button id ="${b.id}" title="${b.title}">next</button>
+  </div>`
+  )
+}
