@@ -77,7 +77,9 @@ function getNotes() {
       })
 
       document.getElementById('demo').innerHTML = note.map((e) => `
-    <div class ="box">
+    <div class ="box" >
+    <div style="background-color:${e.color}">
+    
            <div onclick="togglePopup()" title=${e.title} description=${e.description}>
             <p >${e.title}</p>
             <p>${e.description}</p>
@@ -90,27 +92,29 @@ function getNotes() {
                    </span>
                    <div class = "dropdown-content1" style="left:0;">
                    <div class = "color">
-                   <a href="#"  id="#a7ffeb" style="background-color:#a7ffeb"> </a>
-                   <a href="#"  id="cbf0f8" style="background-color:#cbf0f8"> </a>
-                   <a href="#"   id="#aecbfa" style="background-color:#aecbfa"> </a>
-                   <a href="#"  id="#d7aefb" style="background-color:#d7aefb"> </a>
-                   <a href="#"   id="#fdcfe8" style="background-color:#fdcfe8"> </a>
-                   <a href="#"  id="#e6c9a8" style="background-color:#e6c9a8"> </a>
-                   <a href="#"  id="#e8eae" style="background-color:#e8eae"> </a>
-                   <a href="#"  id="#fff475" style="background-color:#fff475"> </a>
-                   <a href="#"  id="#ccff90" style="background-color:#ccff90"> </a>
-                   <a href="#"  id="#fbbc04" style="background-color:#fbbc04"> </a>
-                   <a href="#" id="#f28b82"" style="background-color:#f28b82"> </a>
-                   <a href="#"  id="#a7ffeb" style="background-color:#a7ffeb"> </a>
+                  <button id="#a7ffeb"  title="${e.id}"  style="background-color:#a7ffeb"> </button>
+                   <a href="#"  id="#cbf0f8"  title=${e.id} style="background-color:#cbf0f8"> </a>
+                   <a href="#"   id="#aecbfa" title=${e.id} style="background-color:#aecbfa"> </a>
+                   <a href="#"   id="#d7aefb" title=${e.id} style="background-color:#d7aefb"> </a>
+                   <a href="#"   id="#fdcfe8" title=${e.id} style="background-color:#fdcfe8"> </a>
+                   <a href="#"   id="#e6c9a8" title=${e.id} style="background-color:#e6c9a8"> </a>
+                   <a href="#"   id="#e8eae"  title=${e.id} style="background-color:#e8eae"> </a>
+                   <a href="#"   id="#fff475" nid=${e.id} style="background-color:#fff475"> </a>
+                   <a href="#"   id="#ccff90" nid=${e.id} style="background-color:#ccff90"> </a>
+                   <a href="#"   id="#fbbc04" nid=${e.id} style="background-color:#fbbc04"> </a>
+                   <a href="#"   id="#f28b82" nid=${e.id} style="background-color:#f28b82"> </a>
+                   <a href="#"   id="#a7ffeb" nid=${e.id} style="background-color:#a7ffeb"> </a>
                  </div>
                  </div>
                    </div>
                     <img src="../assets/gallery.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;" >
-                  <a href="#" id=${e.id} ><img src="../assets/download.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;"></a>
+                  <a href="#" id=${e.id}><img src="../assets/download.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;"></a>
                   <div class="dropdown">
                         <span class="dropbtn"><img src="../assets/3dot.svg" height: 10px; width: 10px;></span>
                         <div class="dropdown-content" style="left:0;">
-                          <a href="#"  id=${e.id}>Delete note</a>
+                          <div id="Itrash">
+                          <a href="#"  id=${e.id}>Delet</a>
+                          </div>
                           <a href="# ">Add label</a>
                           <a href="#">Add drawing</a>
                           <a href="#">Make a copy</a>
@@ -118,6 +122,7 @@ function getNotes() {
                           <a href="#">Copy to Google Docs</a>
                         </div>
                   </div>
+              </div>
               </div>
       </div>`
       )
@@ -131,12 +136,21 @@ function getNotes() {
 
   // Delete note Api call
 
-  const deletenote = document.querySelector('#demo')
-  deletenote.addEventListener('click', (e) => {
-    console.log(trash)
-    let req = {
-      "noteIdList": [e.target.id],
-      "isDeleted": true
+  // const deletenote = document.querySelector('#demo')
+  // deletenote.addEventListener('click', (e) => {
+  //   console.log(trash)
+  //   let req = {
+  //     "noteIdList": [e.target.id],
+  //     "isDeleted": true
+  //   }
+
+  $(document).on('click', '#Itrash', function (event) {
+    console.log('deletetrue')
+    console.log(event.target.id)
+    let req =
+    {
+        "noteIdList": [event.target.id],
+        "isDeleted": true
     }
     $.ajax({
       url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes',
@@ -158,14 +172,15 @@ function getNotes() {
 
   //const color = ["#fff", "#f28b82", "#fbbc04", "#fff475", "#ccff90", "#a7ffeb", "#cbf0f8", "#aecbfa", "#d7aefb", "#fdcfe8", "#e6c9a8", "#e8eaed"]
 
-  $(document).on('click', '.30', function (e) {
-    updateColor = e.currentTarget.id
-    console.log(e.currentTarget.id)
+  $(document).on('click', '.color', function (n) {
+    updateColor = n.target.id
+    console.log(n.target)
     console.log(updateColor)
     console.log("hii")
+    var noteid=n.target.noteid
     let req = {
-      color: updateColor,
-      noteIdList: [e.target.id],
+      "color": updateColor,
+      "noteIdList": [n.target.title],
     }
 
     $.ajax({
@@ -217,6 +232,7 @@ function displayNotes(allnt) {
   document.getElementById('demo').innerHTML = data.map((b) =>
     `<div class="box" style="border:1px solid green;">
   <p>${b.title}</p>
+  <p>${b.description}</p>
   <p>${b.isDeleted}</p>
   <p>${b.isArchived}</p>
   <div class="newbox">
@@ -265,6 +281,7 @@ function displayArchive(allnt) {
   document.getElementById('demo').innerHTML = data.map((b) =>
     `<div class="box" style="border:1px solid green;">
   <p>${b.title}</p>
+  <p>${b.description}</p>
   <p>${b.isDeleted}</p>
   <p>${b.isArchived}</p>
   <div class="newbox">
