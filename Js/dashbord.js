@@ -77,9 +77,7 @@ function getNotes() {
       })
 
       document.getElementById('demo').innerHTML = note.map((e) => `
-    <div class ="box" >
-    <div style="background-color:${e.color}">
-    
+    <div class ="box" style="background-color:${e.color}" >
            <div onclick="togglePopup()" title=${e.title} description=${e.description}>
             <p >${e.title}</p>
             <p>${e.description}</p>
@@ -92,28 +90,30 @@ function getNotes() {
                    </span>
                    <div class = "dropdown-content1" style="left:0;">
                    <div class = "color">
-                  <button id="#a7ffeb"  title="${e.id}"  style="background-color:#a7ffeb"> </button>
-                   <a href="#"  id="#cbf0f8"  title=${e.id} style="background-color:#cbf0f8"> </a>
+                   <a href="#"   id="#a7ffeb" title=${e.id} style="background-color:#a7ffeb"> </a>
+                   <a href="#"   id="#cbf0f8" title=${e.id} style="background-color:#cbf0f8"> </a>
                    <a href="#"   id="#aecbfa" title=${e.id} style="background-color:#aecbfa"> </a>
                    <a href="#"   id="#d7aefb" title=${e.id} style="background-color:#d7aefb"> </a>
                    <a href="#"   id="#fdcfe8" title=${e.id} style="background-color:#fdcfe8"> </a>
                    <a href="#"   id="#e6c9a8" title=${e.id} style="background-color:#e6c9a8"> </a>
                    <a href="#"   id="#e8eae"  title=${e.id} style="background-color:#e8eae"> </a>
-                   <a href="#"   id="#fff475" nid=${e.id} style="background-color:#fff475"> </a>
-                   <a href="#"   id="#ccff90" nid=${e.id} style="background-color:#ccff90"> </a>
-                   <a href="#"   id="#fbbc04" nid=${e.id} style="background-color:#fbbc04"> </a>
-                   <a href="#"   id="#f28b82" nid=${e.id} style="background-color:#f28b82"> </a>
-                   <a href="#"   id="#a7ffeb" nid=${e.id} style="background-color:#a7ffeb"> </a>
+                   <a href="#"   id="#fff475" title=${e.id} style="background-color:#fff475"> </a>
+                   <a href="#"   id="#ccff90" title=${e.id} style="background-color:#ccff90"> </a>
+                   <a href="#"   id="#fbbc04" title=${e.id} style="background-color:#fbbc04"> </a>
+                   <a href="#"   id="#f28b82" title=${e.id} style="background-color:#f28b82"> </a>
+                   <a href="#"   id="#a7ffeb" title=${e.id} style="background-color:#a7ffeb"> </a>
                  </div>
-                 </div>
-                   </div>
+                </div>
+               </div>
                     <img src="../assets/gallery.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;" >
-                  <a href="#" id=${e.id}><img src="../assets/download.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;"></a>
+                    <div id="Archive">
+                  <a href="#"><img id=${e.id} src="../assets/download.svg" ></a>
+                 </div>
                   <div class="dropdown">
                         <span class="dropbtn"><img src="../assets/3dot.svg" height: 10px; width: 10px;></span>
                         <div class="dropdown-content" style="left:0;">
                           <div id="Itrash">
-                          <a href="#"  id=${e.id}>Delet</a>
+                          <a href="#" id=${e.id}>Delete</a>
                           </div>
                           <a href="# ">Add label</a>
                           <a href="#">Add drawing</a>
@@ -122,8 +122,7 @@ function getNotes() {
                           <a href="#">Copy to Google Docs</a>
                         </div>
                   </div>
-              </div>
-              </div>
+              </div>           
       </div>`
       )
     },
@@ -170,6 +169,85 @@ function getNotes() {
     });
   })
 
+//restore note Api Call
+$(document).on('click', '#Restore', function (event) {
+  console.log('deletefalse')
+  console.log(event.target.id)
+  let req =
+  {
+      "noteIdList": [event.target.id],
+      "isDeleted": false
+  }
+  $.ajax({
+    url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes',
+    type: 'POST',
+    data: JSON.stringify(req),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    },
+    success: function (result) {
+      console.log(result);
+
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+})
+
+// Archived note Api call
+   $(document).on('click', '#Archive', function (a) {
+    console.log('Archivetrue')
+    console.log(a.target)
+    let req = {
+      "noteIdList": [a.target.id],
+      "isArchived": true,
+    }
+    $.ajax({
+      url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes',
+      type: 'POST',
+      data: JSON.stringify(req),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+      success: function (result) {
+        console.log(result);
+
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  })
+
+
+  // UnArchived note Api call
+  $(document).on('click', '#unarchive', function (a) {
+    console.log('Archivefalse')
+    console.log(a.target)
+    let req = {
+      "noteIdList": [a.target.id],
+      "isArchived": false,
+    }
+    $.ajax({
+      url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/archiveNotes',
+      type: 'POST',
+      data: JSON.stringify(req),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+      success: function (result) {
+        console.log(result);
+
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  })
   //const color = ["#fff", "#f28b82", "#fbbc04", "#fff475", "#ccff90", "#a7ffeb", "#cbf0f8", "#aecbfa", "#d7aefb", "#fdcfe8", "#e6c9a8", "#e8eaed"]
 
   $(document).on('click', '.color', function (n) {
@@ -227,14 +305,13 @@ document.getElementById('trash').addEventListener('click', (c) => {
   displaytrash(trasharray)
 })
 
+//disply all notes
 function displayNotes(allnt) {
   let data = allnt
   document.getElementById('demo').innerHTML = data.map((b) =>
     `<div class="box" style="border:1px solid green;">
   <p>${b.title}</p>
   <p>${b.description}</p>
-  <p>${b.isDeleted}</p>
-  <p>${b.isArchived}</p>
   <div class="newbox">
   <img src="../assets/bell.svg" style=" height: 18px; width: 18px;  margin-right: 15px;" >
   <img src="../assets/user.svg" style=" height: 18px; width: 18px;  margin-right: 15px;">
@@ -276,14 +353,13 @@ function displayNotes(allnt) {
   )
 }
 
+//display archive notes
 function displayArchive(allnt) {
   let data = allnt
   document.getElementById('demo').innerHTML = data.map((b) =>
-    `<div class="box" style="border:1px solid green;">
+    `<div class="box" style="border:1px solid green; background-color:${b.color}">
   <p>${b.title}</p>
   <p>${b.description}</p>
-  <p>${b.isDeleted}</p>
-  <p>${b.isArchived}</p>
   <div class="newbox">
   <img src="../assets/bell.svg" style=" height: 18px; width: 18px;  margin-right: 15px;" >
   <img src="../assets/user.svg" style=" height: 18px; width: 18px;  margin-right: 15px;">
@@ -308,7 +384,7 @@ function displayArchive(allnt) {
 </div>
  </div>
 <img src="../assets/gallery.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;" >
-<a href="#" id=${b.id} ><img src="../assets/unarchive.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;"></a>
+<a href="#" id="unarchive"><img  id=${b.id} src="../assets/unarchive.svg"  style=" height: 18px; width: 18px;  margin-right: 15px;"></a>
 <div class="dropdown">
       <span class="dropbtn"><img src="../assets/3dot.svg" height: 10px; width: 10px;></span>
       <div class="dropdown-content" style="left:0;">
@@ -325,17 +401,19 @@ function displayArchive(allnt) {
   )
 }
 
+// display tarsh notes
 function displaytrash(allnt) {
   let data = allnt
   document.getElementById('demo').innerHTML = data.map((b) =>
-    `<div class="box" style="border:1px solid green;">
+    `<div class="box" style="border:1px solid green; background-color:${b.color}">
   <p>${b.title}</p>
-  <p>${b.isDeleted}</p>
-  <p>${b.isArchived}</p>
+  <p>${b.description}</p>
   <div class="newbox">
   <img src="../assets/delete1.svg" style=" height: 18px; width: 18px;  margin-right: 15px;" >
-  <img src="../assets/delete.svg" style=" height: 18px; width: 18px;  margin-right: 15px;"> 
+  <img id="Restore" src="../assets/delete.svg" style=" height: 18px; width: 18px;  margin-right: 15px;"> 
 </div>
 </div>`
   )
 }
+
+ 
