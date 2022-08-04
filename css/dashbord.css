@@ -128,10 +128,10 @@ input[type="text"] {
  
 }
 
-.box2{
+  .box2{
 visibility: hidden;
 
-}
+}  
 
 
 .box:hover .box2{
@@ -185,13 +185,13 @@ visibility: visible;
 
 
 .popup {
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%); */
   width: 600px;
   height: 200px;
-  text-align: center;
+  /* text-align: center; */
   background-color: #fff;
   box-sizing: border-box;
   z-index: 100;
