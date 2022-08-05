@@ -164,7 +164,58 @@ function getNotes() {
     }
   });
 }
+$(document).ready(function(){
+  $("#clBtn").click(function(){
+    $("div2").hide();
+  });
+});
 
+let btnn = document.getElementById("clBtn");
+btn.addEventListener('click', () => {
+ 
+  let data = {
+    noteId: updateId,
+    title: title.value,
+    description: desc.value,
+  }
+  console.log(data);
+  let token = localStorage.getItem('token')
+  $.ajax({
+    url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/updateNotes',
+    type: 'POST',
+    data: data,
+    'Content-Type': 'application/json',
+    headers: { 'Authorization': token },
+    success: function (result) {
+      console.log(result);
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+});
+//  let updateId = title.target.id;
+// $(document).on('click', '#Archive', function (a) {
+// let data = {
+//   noteId: updateId,
+//   title: title.value,
+//   description: desc.value,
+// }
+// console.log(data);
+// $.ajax({
+//   url: 'http://fundoonotes.incubation.bridgelabz.com/api/notes/updateNotes',
+//   type: 'POST',
+//   data: data,
+//   'Content-Type': 'application/json',
+//   headers: { 'Authorization': token },
+//   success: function (result) {
+//     console.log(result);
+//   },
+//   error: function (error) {
+//     console.log(error);
+//   }
+// });
+// })
 // Delete note Api call
 
 // const deletenote = document.querySelector('#demo')
@@ -338,10 +389,6 @@ $(document).on('click', '.color', function (n) {
   });
 })
 
-
-
-
-
 document.getElementById('nots').addEventListener('click', (c) => {
   console.log("get note", c.target);
   note = notearray.filter((element) => {
@@ -476,18 +523,19 @@ function displaytrash(allnt) {
 }
 
 document.getElementById('demo').addEventListener('click', (d) => {
-  console.log(d.target.id,d.target.title)
+
+  console.log(d.target.id, d.target.title)
   //$(".popup").toggle();
   document.querySelector('.overlay').innerHTML =
-  ` <div id="div2"  class="col-md-12" >
-  <div>
-  <div class=" mt-3 d-flex popup">
+    ` <div id="div2"  class="col-md-12" >
+  
+  <div class="d-flex flex-wrap popup">
+  <div class=" mt-3 d-flex col-md-12">
     <input type="text" class="mb-2" id="ttl" placeholder=${d.target.title} autocomplete="off">
     <img src="../assets/pin.svg">
     </div>
-  <input type="text" class="mb-2 mt-3" id="desc" placeholder=${d.target.id} autocomplete="off">
-  
-  <div class="d-flex  justify-content-between ">
+    <input type="text" class="mb-2 mt-3 ml-2" id="desc" placeholder=${d.target.id} autocomplete="off">
+    <div class="d-flex  justify-content-between ">
     <div class="col-md-10">
       <img src="../assets/bell.svg">
       <img src="../assets/user.svg">
@@ -499,9 +547,28 @@ document.getElementById('demo').addEventListener('click', (d) => {
       <img class="redu" src="../assets/back.svg">
     </div>
     <div class="col-md-2">
-      <button type="submit" id="myBtn" value="submit" class="btn btn-light mb-2">Close</button>
+      <button  onclick="hide();" type="submit" id="clBtn" value="submit" class="btn btn-light mb-2">Close</button>
     </div>
     </div>
-  </div>
+ </div>
 </div>`
 })
+
+var elements = document.getElementsByClassName("box");
+
+// Declare a loop variable
+var i;
+
+// List View
+function listView() {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].style.width = "100%";
+  }
+}
+
+// Grid View
+function gridView() {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].style.width = "50%";
+  }
+}
