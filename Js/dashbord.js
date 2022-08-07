@@ -109,7 +109,7 @@ function getNotes() {
       })
 
       document.getElementById('demo').innerHTML = note.map((e) => `
-    <div class ="box" style="background-color:${e.color}" >
+    <div  class ="box" style="background-color:${e.color}" >
            <div id="UpBtn" title=${e.title} description=${e.description}>
             <p  title=${e.title} id=${e.description} >${e.title} </p>
             <p>${e.description}</p>
@@ -170,9 +170,9 @@ $(document).ready(function(){
   });
 });
 
-let btnn = document.getElementById("clBtn");
-btn.addEventListener('click', () => {
- 
+let btnn = document.getElementById("demo");
+btnn.addEventListener('click', (h) => {
+  console.log(h.target)
   let data = {
     noteId: updateId,
     title: title.value,
@@ -547,12 +547,18 @@ document.getElementById('demo').addEventListener('click', (d) => {
       <img class="redu" src="../assets/back.svg">
     </div>
     <div class="col-md-2">
-      <button  onclick="hide();" type="submit" id="clBtn" value="submit" class="btn btn-light mb-2">Close</button>
+      <button   type="submit" id="clBtn"  title=${d.target.id} value="submit" class="btn btn-light mb-2">Close</button>
     </div>
     </div>
  </div>
 </div>`
 })
+
+// document.getElementById('demo').addEventListener('click',(p)=>{
+//   console.log(p)
+//   document.querySelector('#div2').innerHTML = ``
+// })
+
 
 var elements = document.getElementsByClassName("box");
 
@@ -569,6 +575,7 @@ function listView() {
 // Grid View
 function gridView() {
   for (i = 0; i < elements.length; i++) {
-    elements[i].style.width = "50%";
+    // elements[i].style.width = "50%";
+    document.getElementById('demo').style.flexWrap = "nowrap"
   }
 }
